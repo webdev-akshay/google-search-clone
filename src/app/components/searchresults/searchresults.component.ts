@@ -9,15 +9,15 @@ import { FormsModule} from '@angular/forms'
   styleUrl: './searchresults.component.scss'
 })
 export class SearchresultsComponent  implements OnInit {
-  searchResults:any[]=[];
-  searchQuery:string=''
+  allResults:any=null;
+  searchQuery:string='';
 
   constructor(private searchService:SearchService){}
   getData(){
     if(this.searchQuery){
       this.searchService.getData(this.searchQuery).subscribe((data:any)=>{
-        this.searchResults=data.organic_results;
-        console.log(this.searchResults)
+        this.allResults=data;
+        console.log(this.allResults)
       },
     (error)=>{
       console.error('Error fetching search results:', error);

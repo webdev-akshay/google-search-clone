@@ -1,92 +1,86 @@
-    <div id="header">
-        <div id="topbar">
-            <img id="searchbarimage" src="google.png" />
-            <div id="searchbar" type="text">
-                <input id="searchbartext" [(ngModel)]="searchQuery" type="text" value="computer engineering mutex concept" />
-                <button id="searchbarbutton" (click)="getData()">
-                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
-                        </path>
-                    </svg>
-                </button>
-            </div>
-            <div id="boxesicon"></div>
-            <div id="bellicon"></div>
-            <img id="profileimage" src="" />
+<div id="header">
+    <div id="topbar">
+        <img id="searchbarimage" src="google.png" />
+        <div id="searchbar" type="text">
+            <input id="searchbartext" [(ngModel)]="searchQuery" type="text"
+                value="computer engineering mutex concept" />
+            <button id="searchbarbutton" (click)="getData()">
+                <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path
+                        d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
+                    </path>
+                </svg>
+            </button>
         </div>
-        <div id="optionsbar">
-            <ul id="optionsmenu1">
-                <li id="optionsmenuactive">All</li>
-                <li>News</li>
-                <li>Videos</li>
-                <li>Images</li>
-                <li>Maps</li>
-                <li>More</li>
-            </ul>
-
-            <ul id="optionsmenu2">
-                <li>Settings</li>
-                <li>Tools</li>
-            </ul>
-        </div>
+        <div id="boxesicon"></div>
+        <div id="bellicon"></div>
+        <img id="profileimage" src="" />
     </div>
-    <div id="searchresultsarea">
-        <p id="searchresultsnumber">About 155,000 results (0.56 seconds) </p>
-        <div class="searchresult" *ngFor="let searcheddata of searchResults">
-            <h2 class="mb-1"><a href=searcheddata.redirect_link>{{searcheddata.displayed_link}}</a></h2>
-            <a [href]="searcheddata?.link" target="_blank">{{searcheddata.link}}</a> 
-            <p>{{searcheddata.snippet}}</p>
-        </div>
+    <div id="optionsbar">
+        <ul id="optionsmenu1">
+            <li id="optionsmenuactive">All</li>
+            <li>News</li>
+            <li>Videos</li>
+            <li>Images</li>
+            <li>Maps</li>
+            <li>More</li>
+        </ul>
 
-       
-
-        <div class="relatedsearches">
-            <h3>Searches related to computer engineering mutex concept</h3>
-            <div class="relatedlists">
-                <ul class="relatedleft">
-                    <li>what is <b>mutex</b> and semaphore</li>
-                    <li><b>mutex</b> lock c++</li>
-                    <li><b>mutex</b> java</li>
-                    <li><b>mutex</b> c++</li>
-                </ul>
-                <ul class="relatedright">
-                    <li><b>mutex</b> vs lock</li>
-                    <li><b>mutex</b> semaphore example</li>
-                    <li><b>mutex</b> and semaphore example in c</li>
-                    <li><b>mutex</b> c#</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="pagebar">
-            <ul class="pagelist">
-                <li class="pagelistprevious">Previous</li>
-                <li class="pagelistfirst">1</li>
-                <li class="pagelistnumber">2</li>
-                <li class="pagelistnumber">3</li>
-                <li class="pagelistnumber">4</li>
-                <li class="pagelistnumber">5</li>
-                <li class="pagelistnumber">6</li>
-                <li class="pagelistnumber">7</li>
-                <li class="pagelistnumber">8</li>
-                <li class="pagelistnumber">9</li>
-                <li class="pagelistnumber">10</li>
-                <li class="pagelistnext">Next</li>
-            </ul>
-        </div>
-    </div>
-
-    <div id="footer">
-        <div id="footerlocation">
-            <p>Somewhere, Moon </p>
-            <p> - From your phone (Location History) - Use precise location - Learn more</p>
-        </div>
-
-        <ul id="footermenu">
-            <li>Help</li>
-            <li>Send feedback</li>
-            <li>Privacy</li>
-            <li>Terms</li>
+        <ul id="optionsmenu2">
+            <li>Settings</li>
+            <li>Tools</li>
         </ul>
     </div>
+</div>
+<div id="searchresultsarea" *ngIf="allResults?.organic_results">
+    <p id="searchresultsnumber">About 155,000 results (0.56 seconds) </p>
+    <div class="searchresult" *ngFor="let result of allResults.organic_results">
+        <h2 class="mb-1"><a [href]="result.displayed_link" target="_blank">{{result.displayed_link}}</a></h2>
+        <a [href]="result?.link" target="_blank">{{result.link}}</a>
+        <p>{{result.snippet}}</p>
+    </div>
+</div>
+<div id="searchresultsarea" class="row" *ngIf="allResults?.inline_images">
+    <p id="searchresultsnumber">About 155,000 results (0.56 seconds) </p>
+            <div class="col-md-3" *ngFor="let imageData of allResults.inline_images">
+                <div class="card">
+                    <img [src]="imageData.thumbnail" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{imageData.source_name}}</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a [href]="imageData.source" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+        </div>
+    </div>
+
+
+<div class="pagebar">
+    <ul class="pagelist">
+        <li class="pagelistprevious">Previous</li>
+        <li class="pagelistfirst">1</li>
+        <li class="pagelistnumber">2</li>
+        <li class="pagelistnumber">3</li>
+        <li class="pagelistnumber">4</li>
+        <li class="pagelistnumber">5</li>
+        <li class="pagelistnumber">6</li>
+        <li class="pagelistnumber">7</li>
+        <li class="pagelistnumber">8</li>
+        <li class="pagelistnumber">9</li>
+        <li class="pagelistnumber">10</li>
+        <li class="pagelistnext">Next</li>
+    </ul>
+</div>
+<div id="footer">
+    <div id="footerlocation">
+        <p>Somewhere, Moon </p>
+        <p> - From your phone (Location History) - Use precise location - Learn more</p>
+    </div>
+
+    <ul id="footermenu">
+        <li>Help</li>
+        <li>Send feedback</li>
+        <li>Privacy</li>
+        <li>Terms</li>
+    </ul>
+</div>

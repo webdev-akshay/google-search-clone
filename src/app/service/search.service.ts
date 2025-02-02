@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -11,10 +11,11 @@ export class SearchService {
   constructor(private http:HttpClient) { }
 
   getData(query:string):Observable<any>{
-    const params={
-      q:query,
-      api_key:this.apiKey
-    }
+    const params =new HttpParams()
+     .set('q',query)
+     .set('engine','google')
+     .set('api_key',this.apiKey)
+    
     return  this.http.get(this.apiUrl, {params})
   }
 }
