@@ -130,10 +130,7 @@ html, body {
     padding: 0px 10px 15px 20px;
 }
 
-#searchresultsarea {
-    margin-left: 150px;
-    font-family: 'Arial';
-}
+
 
 #searchresultsnumber {
     font-size: 0.8rem;
@@ -409,4 +406,13 @@ html, body {
 
 #footerlocation p:nth-of-type(1) {
     font-weight: bold;
+}
+// 
+.card{
+     .card-title, a{
+    font-size: 12px;
+}
+img{
+    border-radius: 16px;
+}
 }

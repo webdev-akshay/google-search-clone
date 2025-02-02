@@ -32,23 +32,24 @@
         </ul>
     </div>
 </div>
-<div id="searchresultsarea" *ngIf="allResults?.organic_results">
-    <p id="searchresultsnumber">About 155,000 results (0.56 seconds) </p>
+<section class="container">
+    <div>
+    <p id="searchresultsnumber" *ngIf="allResults?.search_information">About {{allResults?.search_information.total_results}} results ({{allResults?.search_information.time_taken_displayed}}) sec. </p>
+    </div>
+<div *ngIf="allResults?.organic_results">
     <div class="searchresult" *ngFor="let result of allResults.organic_results">
         <h2 class="mb-1"><a [href]="result.displayed_link" target="_blank">{{result.displayed_link}}</a></h2>
         <a [href]="result?.link" target="_blank">{{result.link}}</a>
         <p>{{result.snippet}}</p>
     </div>
 </div>
-<div id="searchresultsarea" class="row" *ngIf="allResults?.inline_images">
-    <p id="searchresultsnumber">About 155,000 results (0.56 seconds) </p>
-            <div class="col-md-3" *ngFor="let imageData of allResults.inline_images">
-                <div class="card">
+<div class="row" *ngIf="allResults?.inline_images">
+            <div class="col-md-2" *ngFor="let imageData of allResults.inline_images">
+                <div class="card border-0">
                     <img [src]="imageData.thumbnail" class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">{{imageData.source_name}}</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a [href]="imageData.source" class="btn btn-primary">Go somewhere</a>
+                      <a [href]="imageData.source">{{imageData.title}}</a>
                     </div>
                   </div>
         </div>
@@ -84,3 +85,4 @@
         <li>Terms</li>
     </ul>
 </div>
+</section>
