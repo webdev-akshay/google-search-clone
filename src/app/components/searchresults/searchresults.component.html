@@ -4,7 +4,7 @@
         <div id="searchbar" type="text">
             <input id="searchbartext" [(ngModel)]="searchQuery" type="text"
                 value="computer engineering mutex concept" />
-            <button id="searchbarbutton" (click)="getData()">
+            <button id="searchbarbutton" (click)="getData(1)">
                 <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path
                         d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z">
@@ -12,9 +12,6 @@
                 </svg>
             </button>
         </div>
-        <div id="boxesicon"></div>
-        <div id="bellicon"></div>
-        <img id="profileimage" src="" />
     </div>
     <div id="optionsbar">
         <ul id="optionsmenu1">
@@ -34,55 +31,35 @@
 </div>
 <section class="container">
     <div>
-    <p id="searchresultsnumber" *ngIf="allResults?.search_information">About {{allResults?.search_information.total_results}} results ({{allResults?.search_information.time_taken_displayed}}) sec. </p>
+        <p id="searchresultsnumber" *ngIf="allResults?.search_information">About
+            {{allResults?.search_information.total_results}} results
+            ({{allResults?.search_information.time_taken_displayed}}) sec. </p>
     </div>
-<div *ngIf="allResults?.organic_results">
-    <div class="searchresult" *ngFor="let result of allResults.organic_results">
-        <h2 class="mb-1"><a [href]="result.displayed_link" target="_blank">{{result.displayed_link}}</a></h2>
-        <a [href]="result?.link" target="_blank">{{result.link}}</a>
-        <p>{{result.snippet}}</p>
-    </div>
-</div>
-<div class="row" *ngIf="allResults?.inline_images">
-            <div class="col-md-2" *ngFor="let imageData of allResults.inline_images">
-                <div class="card border-0">
-                    <img [src]="imageData.thumbnail" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{imageData.source_name}}</h5>
-                      <a [href]="imageData.source">{{imageData.title}}</a>
-                    </div>
-                  </div>
+    <div *ngIf="allResults?.organic_results">
+        <div class="searchresult" *ngFor="let result of allResults.organic_results">
+            <h2 class="mb-1"><a [href]="result.displayed_link" target="_blank">{{result.displayed_link}}</a></h2>
+            <a [href]="result?.link" target="_blank">{{result.link}}</a>
+            <p>{{result.snippet}}</p>
         </div>
     </div>
-
-
-<div class="pagebar">
-    <ul class="pagelist">
-        <li class="pagelistprevious">Previous</li>
-        <li class="pagelistfirst">1</li>
-        <li class="pagelistnumber">2</li>
-        <li class="pagelistnumber">3</li>
-        <li class="pagelistnumber">4</li>
-        <li class="pagelistnumber">5</li>
-        <li class="pagelistnumber">6</li>
-        <li class="pagelistnumber">7</li>
-        <li class="pagelistnumber">8</li>
-        <li class="pagelistnumber">9</li>
-        <li class="pagelistnumber">10</li>
-        <li class="pagelistnext">Next</li>
-    </ul>
-</div>
-<div id="footer">
-    <div id="footerlocation">
-        <p>Somewhere, Moon </p>
-        <p> - From your phone (Location History) - Use precise location - Learn more</p>
+    <div class="row" *ngIf="allResults?.inline_images">
+        <div class="col-md-2" *ngFor="let imageData of allResults.inline_images">
+            <div class="card border-0">
+                <img [src]="imageData.thumbnail" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{imageData.source_name}}</h5>
+                    <a [href]="imageData.source">{{imageData.title}}</a>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <ul id="footermenu">
-        <li>Help</li>
-        <li>Send feedback</li>
-        <li>Privacy</li>
-        <li>Terms</li>
-    </ul>
-</div>
+    <div class="container">
+        
+        <div class="pagination">
+          <button class="btn-info" (click)="getData(currentPage - 1)" [disabled]="currentPage === 1">Previous</button>
+          <span class="ms-3 me-3"> Page {{ currentPage }} of {{ totalPages }} </span>
+          <button class="btn-primary" (click)="getData(currentPage + 1)" [disabled]="currentPage === totalPages">Next</button>
+        </div>
+      </div>
+      
 </section>

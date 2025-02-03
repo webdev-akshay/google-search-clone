@@ -10,14 +10,18 @@ import { FormsModule} from '@angular/forms'
 })
 export class SearchresultsComponent  implements OnInit {
   allResults:any=null;
-  searchQuery:string='';
-
+  searchQuery:string='coffie';
+  currentPage=1;
+  totalPages=5
   constructor(private searchService:SearchService){}
-  getData(){
+  getData(page:number=1){
     if(this.searchQuery){
-      this.searchService.getData(this.searchQuery).subscribe((data:any)=>{
+      this.currentPage=page
+      this.searchService.getData(this.searchQuery,page).subscribe((data:any)=>{
         this.allResults=data;
         console.log(this.allResults)
+        this.totalPages = Math.ceil(data.search_information.total_results / 10);
+
       },
     (error)=>{
       console.error('Error fetching search results:', error);
